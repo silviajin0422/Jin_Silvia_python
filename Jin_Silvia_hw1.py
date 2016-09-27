@@ -5,7 +5,7 @@
 
 Homework 1 Group D
 """
-
+## Prof G - Nice way to break down the problem.
 ### Problem 1 ###
 
 def translateWord(char):
@@ -13,6 +13,10 @@ def translateWord(char):
     This is a helper function for the function translate, which only translate one
     word in English into Swedish.
     '''
+    ## Prof G - You should document your paraeters in the header doc. You might
+    ## Prof G - consider naming the parameter name "word" instead of "char"
+    ## Prof G - since you are translating a whole word not just a character.
+    
     key = {'merry':'god','christmas':'jul','and':'och','happy':'gott','new':'nytt','year':'år'}
     if char in key:
         return key[char]
@@ -61,7 +65,7 @@ def char_freq(text):
 print(char_freq("abbabcbdbabdbdbabababcbcbab"))
 
 ### Problem 3 ###
-
+## Prof G - Nice work.
 def rot13Char(char):
     '''
     This is a helper function for the function rot13cipher.
@@ -114,6 +118,9 @@ def correct(text):
     isDot = False # initialize a boolean for period
     i=0 # initialize the position where we are checking the string
     l = len(text)
+    
+    ## Prof G - Instead of using a break, why not use the expression i < l in
+    ## Prof G - the while statement?
     while True:
        if i >= l: # if we reach the end of the string, stop
            break
@@ -281,6 +288,7 @@ def map1(listWords):
 # example
 print(map1(['a','be','can','doll']))
 
+## Prof G - Great alternative using map function as a generator
 def map2(listWords):
     '''
     This function maps a list of words into a list of integers
@@ -293,7 +301,8 @@ def map2(listWords):
 
 # example
 print(map2(['a','be','can','doll']))
-    
+ 
+## Prof G - Nice implicit iteration over the list  (list comprehension) 
 def map3(listWords):
     '''
     This function maps a list of words into a list of integers
@@ -367,7 +376,8 @@ def myMap(function,myList):
     for i in myList:
         newlist.append(function(i)) # add function(i) to the new list
     return newlist
-    
+
+## Prof G - Nice use of an anonymous function    
 print(myMap(lambda x: x+1,[1,2,3,4,5,42]))
     
 def myFilter(function,myList):
