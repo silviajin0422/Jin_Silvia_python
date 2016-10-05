@@ -19,6 +19,10 @@ def is_palindrome(word):
     Output: True if the word is a palindrome;
             False if the word is not a palindrome.
     '''
+    ##Prof G - You need to handle mixed case. All but one of my test cases 
+    ##Prof G - failed. You should strip the word of blanks, punctuation, and
+    ##Prof G - and normalize case (either all upper or all lower) before
+    ##Prof G - testing.
     if word == '': #base case: if the word is empty
         return True
     elif len(word) == 1: #base case: if only one character
@@ -62,6 +66,7 @@ def semord_recogniser(filepath):
     The function read through the content in the file and print
     semordnilap to the screen.
     '''
+    ##Prof G - Need to handle mixed case
     file=open(filepath) #open the file
     words = file.read().split() #read word by word, save to a list
     l=len(words) #get the number of words
@@ -93,6 +98,8 @@ def char_fraq_table():
     contained in the file, and prints a sorted and nicely formatted character
     frequency table to the screen.
     '''
+    ##Prof G - Need to handle mixed case
+    ##Prof G - Should allow file name to be passed in as a parameter
     filepath = input('Please type the file name:') # take the filepath from the user
     file = open(filepath) # open the file
     words = file.read().split() # read the file word by word
@@ -136,6 +143,9 @@ spoken.
 import os
 import time
 
+##Prof G - Assignment requires a third parameter. There are two pause times.
+##Prof G - The first the time to pause between letters and the second 
+##Prof G - between words. Can't make your function work.
 def speak_ICAO(msg,pauseTime):
     '''
     This functions takes in a message and prounance the message using ICAO.
@@ -170,6 +180,7 @@ language, the works of an author, or in a single text. Define a function that gi
 all its hapaxes. Make sure your program ignores capitalization.
 '''
 
+##Prof G - Nice, works well.
 def hapaxFinder(filepath):
     '''
     This function finds the hapax legomenon in a file.
@@ -195,16 +206,23 @@ hapaxFinder('test05.txt')
 Write a program that given a text file will create a new text file in which all the lines from the original file are
 numbered from 1 to n (where n is the number of lines in the file).
 '''
+
+##Prof G - This will not work correctly. Prepending number to the filepath ends
+##Prof G - up creating an invlaid path. To do this automatically, you need to 
+##Prof G - parse the file path and then modify only the filename.
 def numFile(filepath):
     '''
     This function takes in a text file and create a new text file in which all the lines from the original file
     are numbered from 1 to n (where n is the number of lines in the file).
     Input: a string of a filepath.
     '''
+    ##Prof G - Should start numbering lines ar=t 1 insread of 0.
     file=open(filepath) # open the file
     lines = file.read().split('\n') # read the file line by line
     file.close() # close the file
+    ##Prof G - See note aboue. This fails when a full path name is provided.
     newFilepath = 'numbered'+filepath # create a name for the new file
+    ##Prof G - What if the file already exists?
     newFile = open(newFilepath,'w') # create the new file
     for i in range(len(lines)): # for each line in the original file
         newFile.write(str(i)+' '+lines[i]+'\n') # write the line number and the line content
@@ -219,6 +237,7 @@ Write a program that will calculate the average word length of a text stored in 
 of the word tokens in the text, divided by the number of word tokens).
 '''
 
+##Prof G - Works well!
 def aveLength(filepath):
     '''
     This function calculates the average word length of a text stored in a file.
@@ -259,7 +278,7 @@ Take a guess.
 18
 Good job, Torbjorn! You guessed my number in 3 guesses!
 '''
-
+##Prof G - Nice, works well.
 import random
 def guess_number():
     '''
@@ -307,6 +326,7 @@ tiger
 Clue: [t][i][g][e][r]
 '''
 
+##Prof G - Try the word 'catch'. You'll find the function ignores the second 'c'
 def lingo(word):
     '''
     This function lets the user play the lingo game in the terminal.
@@ -435,6 +455,10 @@ def writeSenSplit(filepath):
     text = file.read() # read the file, put the content into a string
     file.close() # close the file
     splittedText= senSplitter(text) # split the content, save it into a list
+    
+    ##Prof G - This concats splitted to the beggining of the path and fails.
+    ##Prof G - Try accepting both a file path and an output file path as 
+    ##Prof G - parameters
     newFilepath = 'splitted' + filepath # create a name for the new file
     newFile = open(newFilepath, 'w') # open the new file
     for i in range(len(splittedText)): # for each string in the list
