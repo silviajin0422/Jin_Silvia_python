@@ -50,8 +50,8 @@ bin sizes, the function should plot 12 histograms (3 for each numeric variable).
 Group the histograms by the column name.
 '''
 
-columnname = ['sepal length', 'sepal width', 'petal length',
-          'petal width', 'class']
+##Prof G - COuld you get these values from df?
+columnname = ['sepal length', 'sepal width', 'petal length', 'petal width', 'class']
 def plotHist(binSizes):
     '''
     This function takes in a list of bin sizes and plot the histgrams
