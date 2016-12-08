@@ -23,6 +23,13 @@ def is_palindrome(word):
     ##Prof G - failed. You should strip the word of blanks, punctuation, and
     ##Prof G - and normalize case (either all upper or all lower) before
     ##Prof G - testing.
+    # Silvia: Revised as prompted. Thank you. 
+    
+    string=string.lower() # lower case of each letter
+    puncspace="`~!@#$%^&*()_-=+[]{}\|;:,<.>/? "
+    for k in word:
+        if k in word:
+            word=word.replace(k,'') #no spaces and punctuations in string
     if word == '': #base case: if the word is empty
         return True
     elif len(word) == 1: #base case: if only one character
@@ -39,7 +46,7 @@ def palin_recogniser(filepath):
     a palindrome.
     Input: a string which is a filepath.
     '''
-    file = open(filepath) #open the file
+    file = open(filepath) # open the file
     for line in file.read().split('\n'): # read the content line by line
         if is_palindrome(line): # check if palindrome
             print(line)
@@ -67,13 +74,19 @@ def semord_recogniser(filepath):
     semordnilap to the screen.
     '''
     ##Prof G - Need to handle mixed case
+    # Silvia: Revised as prompted. Thank you. 
     file=open(filepath) #open the file
     words = file.read().split() #read word by word, save to a list
-    l=len(words) #get the number of words
+    puncspace="`~!@#$%^&*()_-=+[]{}\|;:,<.>/?"
+    for k in words:
+        k=k.lower() # lower case of every character
+        if k in puncspace:
+            words=words.replace(k,'') # no punctuations in string
+    l=len(words) # get the number of words
     result = [] # create an empty list to save result
     for i in range(l-1): # for loop: look at each word
         for j in range(i+1,l): # for loop: for each word, compare it to the words after it
-            if words[i] == words[j][::-1]: # if there is such semordnilap 
+            if words[i] == words[j][::-1] and len(words[i])>1: # if there is such semordnilap 
                 result.append(words[i]) # save the first word to the result
                 result.append(words[j]) # save the second word to the result
     print(result)
@@ -91,7 +104,7 @@ frequency table to the screen.
 '''
 import operator
 
-def char_fraq_table():
+def char_fraq_table(filepath):
     '''
     This is a function that when run in a terminal, accepts
     a file name from the user, builds a frequency listing of the characters
@@ -100,23 +113,22 @@ def char_fraq_table():
     '''
     ##Prof G - Need to handle mixed case
     ##Prof G - Should allow file name to be passed in as a parameter
-    filepath = input('Please type the file name:') # take the filepath from the user
-    file = open(filepath) # open the file
-    words = file.read().split() # read the file word by word
-    chars = [] # create an empty list
-    for word in words: # for loop: look at each word
-        for i in range(len(word)): # put each character in a list
-            chars.append(word[i])
-    freqs = {key: 0 for key in chars} # create a dictionary with all the characters
-    for char in chars: # for each character, count them and save as values in the dictionary
-        freqs[char] += 1
-    keys = sorted(freqs.keys()) # sort the dictionary by the characters
-    for word in keys: # print the dictionary with the sorted characters
-        print("%s: %s" % (word, freqs[word]))
+    # Silvia: Revised as prompted. Thank you. 
+    words=open(filepath).read() # open a file and read lines
+    dic= {'a':0,'b':0,'c':0,'d':0,'e':0,'f':0,'g':0,'h':0,'i':0,'j':0,
+          'k':0,'l':0,'m':0,'n':0,'o':0,'p':0,'q':0,'r':0,'s':0,'t':0,
+          'u':0,'v':0,'w':0,'x':0,'y':0,'z':0}# formated dictionary
+    words=words.lower() # lower case of each letter
+    words=words.replace('\n','')
+    for char in words:
+        if char in dic:
+            dic[char]+=1 # check frequency
+    import operator
+    sorted_dic = sorted(dic.items(), key=operator.itemgetter(0)) # convert into a list and sort
+    return sorted_dic
 
 # example
-char_fraq_table()
-# Please input file name: test03.txt
+char_fraq_table('text03.txt')
 
 ### Problem 04 ###
 '''
@@ -146,7 +158,8 @@ import time
 ##Prof G - Assignment requires a third parameter. There are two pause times.
 ##Prof G - The first the time to pause between letters and the second 
 ##Prof G - between words. Can't make your function work.
-def speak_ICAO(msg,pauseTime):
+# Silvia: Revised as prompted. Thank you.
+def speak_ICAO(message,ICAOpause=1,wordpause=3):
     '''
     This functions takes in a message and prounance the message using ICAO.
     Input: msg: a string of words.
@@ -154,24 +167,21 @@ def speak_ICAO(msg,pauseTime):
     When running the function in the terminal, we will hear the message pronounced.
     '''
     # create the ICAO dictionary
-    d = {'a':'alfa', 'b':'bravo', 'c':'charlie',
-         'd':'delta', 'e':'echo', 'f':'foxtrot', 'g':'golf', 'h':'hotel',
-         'i':'india', 'j':'juliett', 'k':'kilo', 'l':'lima',
-         'm':'mike', 'n':'november', 'o':'oscar', 'p':'papa',
-         'q':'quebec', 'r':'romeo', 's':'sierra', 't':'tango',
-         'u':'uniform', 'v':'victor', 'w':'whiskey', 'x':'x-ray', 'y':'yankee', 'z':'zulu'}
-    # store the length of the message
-    l = len(msg)
-    # change the characters in the message to lowercase, for prounanciation purpose
-    msg=msg.lower()
-    for i in range(l): # look at each character in the message
-        if msg[i] == ' ': # pause between words
-            time.sleep(pauseTime)
-        elif msg[i] in d: # otherwise, prounance the ICAO for the message
-            os.system('say' + d[msg[i]])
+    ICAO = {'a':'alfa', 'b':'bravo', 'c':'charlie', 'd':'delta', 'e':'echo', 
+ 	'f':'foxtrot', 'g':'golf', 'h':'hotel', 'i':'india', 'j':'juliett', 
+ 	'k':'kilo', 'l':'lima', 'm':'mike', 'n':'november', 'o':'oscar', 
+ 	'p':'papa', 'q':'quebec', 'r':'romeo', 's':'sierra', 't':'tango', 
+ 	'u':'uniform', 'v':'victor', 'w':'whiskey', 'x':'x-ray', 'y':'yankee', 
+ 	'z':'zulu'} # define dictionary dic
+    for k in message.split():#split a string into words
+        for i in k:#i represents each character
+            if i not in "`~!@#$%^&*()_-=+[]{}\|;:,<.>/?0123456789": #only letter
+                os.system('say '+ICAO[i.lower()])#speak
+                time.sleep(ICAOpause)#pasue between ICAO words
+        time.sleep(wordpause)#pause between words
 
 # example
-speak_ICAO('Silvia',0.25)
+speak_ICAO('I am Silvia',1,3)
 
 ### Problem 05 ###
 '''
@@ -219,14 +229,11 @@ def numFile(filepath):
     ##Prof G - Should start numbering lines ar=t 1 insread of 0.
     file=open(filepath) # open the file
     lines = file.read().split('\n') # read the file line by line
-    file.close() # close the file
-    ##Prof G - See note aboue. This fails when a full path name is provided.
-    newFilepath = 'numbered'+filepath # create a name for the new file
-    ##Prof G - What if the file already exists?
-    newFile = open(newFilepath,'w') # create the new file
+    newFile = open('Numbered.txt','w') # create the new file
     for i in range(len(lines)): # for each line in the original file
-        newFile.write(str(i)+' '+lines[i]+'\n') # write the line number and the line content
+        newFile.write(str(i+1)+' '+lines[i]+'\n') # write the line number and the line content
     newFile.close() # close the written file
+    # Silvia: Revised as prompted. Thank you. 
  
 # example
 numFile('test06.txt')
@@ -339,13 +346,13 @@ def lingo(word):
         guess = input('Take a guess of a word with '+str(l)+ ' letters:')
         myOutput = '' # create an empty output
         if len(guess) == l: # the guess has to have the same length
-            for i in range(len(word)): # look at each character
-                if word.find(guess[i]) == i: # if both the character and the location is correct
+            for i in range(len(guess)): # look at each character
+                if guess[i]=word[i]: # if both the character and the location is correct
                     myOutput = myOutput + '[' + guess[i]+']'
-                elif guess[i] not in word: # if the guessed character is not currect
-                    myOutput = myOutput + guess[i]
-                else: # else: the character is currect, but the location is not correct
+                elif guess[i] in word: # else if: the character is currect, but the location is not correct
                     myOutput = myOutput +'(' + guess[i] + ')'
+                else: # else: the guessed character is not currect
+                    myOutput = myOutput + guess[i]
             print(myOutput) # give the hint
             if guess == word: # if the word is correct
                 print('Congratulations! You got it!')
