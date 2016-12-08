@@ -8,14 +8,19 @@ Homework 1 Group D
 ## Prof G - Nice way to break down the problem.
 ### Problem 1 ###
 
-def translateWord(char):
+def translateWord(word):
     '''
     This is a helper function for the function translate, which only translate one
     word in English into Swedish.
+    Input: word: a string of English word to be translated to Swedish.
+    Output: a string of the translated word in swedish if the word is in the dictionary.
+            a string of the word itself if the word is not in the dictionary.
+    
     '''
     ## Prof G - You should document your paraeters in the header doc. You might
     ## Prof G - consider naming the parameter name "word" instead of "char"
     ## Prof G - since you are translating a whole word not just a character.
+    ## Silvia: Revised as prompted. Thank you. 
     
     key = {'merry':'god','christmas':'jul','and':'och','happy':'gott','new':'nytt','year':'år'}
     if char in key:
